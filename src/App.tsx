@@ -1,10 +1,13 @@
-import { useState } from "react";
 import "./App.css";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <div></div>;
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 }
 
 export default App;
