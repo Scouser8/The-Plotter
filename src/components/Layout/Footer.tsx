@@ -8,8 +8,7 @@ function Footer() {
   return (
     <Box component="footer" sx={footerStyles(theme)}>
       <Typography variant="body1">
-        Frontend Developer Plotter Task (Incorta) -
-        mohammed.abdelbaki96@hotmail.com © 2024
+        Frontend Developer - mohammed.abdelbaki96@hotmail.com © 2024
       </Typography>
     </Box>
   );
