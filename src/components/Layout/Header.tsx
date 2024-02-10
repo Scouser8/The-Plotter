@@ -4,7 +4,7 @@ import headerStyles from "../../styles/header.styles";
 function Header() {
   return (
     <Box sx={headerStyles}>
-      <Typography>Plotter App</Typography>
+      <Typography variant="h5">Plotter App</Typography>
     </Box>
   );
 }

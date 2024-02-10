@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 
 function MainContent() {
   return (
-<Container
+    <Container
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <SelectedColumns />
