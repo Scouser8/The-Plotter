@@ -1,11 +1,15 @@
-import { Fragment } from "react";
 import SelectedColumns from "../SelectedColumns";
+import MultipleLineChart from "../LineChart";
+import { Container } from "@mui/material";
 
 function MainContent() {
   return (
-    <Fragment>
+<Container
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <SelectedColumns />
-    </Fragment>
+      <MultipleLineChart />
+    </Container>
   );
 }
 
