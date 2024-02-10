@@ -1,9 +1,5 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
-const colors: { [key: string]: string } = {
-  Cost: "green",
-};
-
 export default function MultipleLineChart() {
   const dimension = testResponse.data.find(({ name }) => name === "Product");
   const measures = testResponse.data.filter(({ name }) => name !== "Product");
