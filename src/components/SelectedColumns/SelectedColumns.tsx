@@ -1,12 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import selectedColumnsStyles from "../../styles/selectedColumns.styles";
 import { useState } from "react";
-import { DIMENSIONS, MEASURES } from "../../constants";
+import { DIMENSION_FUNCTION, MEASURE_FUNCTION } from "../../constants";
+import { ColumnFunction } from "../../types";
 
 type SelectedColumns = {
   selectedDimension: string;
   selectedMeasures: string[];
 };
+
+type EmptyColumnsGroup = "" | [];
 
 function SelectedColumns() {
   const [selectedColumns, setSelectedColumns] = useState<SelectedColumns>({
@@ -14,27 +17,30 @@ function SelectedColumns() {
     selectedMeasures: [],
   });
   const { selectedDimension, selectedMeasures } = selectedColumns;
-  
-  const handleOnDrop = (e: React.DragEvent) => {
-    const column = e.dataTransfer.getData("column").toLowerCase();
-    if (
-      DIMENSIONS.includes(column) &&
-      !selectedDimension &&
-      selectedDimension !== column
-    ) {
-      console.log("Set Dimension");
 
+  const handleOnDrop = (e: React.DragEvent, targetedFunction: ColumnFunction) => {
+    const columnName = e.dataTransfer.getData("columnName").toLowerCase();
+    const columnFunction = e.dataTransfer
+      .getData("columnFunction")
+      .toLowerCase();
+    const canAddDimension =
+      targetedFunction === DIMENSION_FUNCTION &&
+      columnFunction === DIMENSION_FUNCTION &&
+      selectedDimension !== columnName;
+    const canAddMeasure =
+      targetedFunction === MEASURE_FUNCTION &&
+      columnFunction === MEASURE_FUNCTION &&
+      !selectedMeasures.includes(columnName);
+
+    if (canAddDimension) {
       setSelectedColumns(() => ({
         ...selectedColumns,
-        selectedDimension: column,
+        selectedDimension: columnName,
       }));
-    } else if (
-      MEASURES.includes(column) &&
-      !selectedMeasures.includes(column)
-    ) {
+    } else if (canAddMeasure) {
       setSelectedColumns(() => ({
         ...selectedColumns,
-        selectedMeasures: [...selectedMeasures, column],
+        selectedMeasures: [...selectedMeasures, columnName],
       }));
     }
   };
@@ -42,12 +48,21 @@ function SelectedColumns() {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
+
+  const hanldeClearColumnsGroup = (
+    columnFunctionality: string,
+    emptyValue: EmptyColumnsGroup
+  ) => {
+    setSelectedColumns((prevState) => ({
+      ...prevState,
+      [columnFunctionality]: emptyValue,
+    }));
+  };
   return (
     <Box sx={selectedColumnsStyles.root}>
       <Box
         sx={selectedColumnsStyles.container}
-        component="div"
-        onDrop={handleOnDrop}
+        onDrop={(e) => handleOnDrop(e, DIMENSION_FUNCTION)}
         onDragOver={handleDragOver}
       >
         <Typography className="functionLabel">Dimension</Typography>
@@ -58,12 +73,16 @@ function SelectedColumns() {
             </Typography>
           )}
         </Box>
-        <Button variant="outlined">Clear</Button>
+        <Button
+          variant="outlined"
+          onClick={() => hanldeClearColumnsGroup("selectedDimension", "")}
+        >
+          Clear
+        </Button>
       </Box>
       <Box
         sx={selectedColumnsStyles.container}
-        component="div"
-        onDrop={handleOnDrop}
+        onDrop={(e) => handleOnDrop(e, MEASURE_FUNCTION)}
         onDragOver={handleDragOver}
       >
         <Typography className="functionLabel">Measures</Typography>
@@ -74,7 +93,12 @@ function SelectedColumns() {
             </Typography>
           ))}
         </Box>
-        <Button variant="outlined">Clear</Button>
+        <Button
+          variant="outlined"
+          onClick={() => hanldeClearColumnsGroup("selectedMeasures", [])}
+        >
+          Clear
+        </Button>
       </Box>
     </Box>
   );

@@ -15,7 +15,6 @@ export default function MultipleLineChart() {
       series={measures.map((measure) => ({
         data: measure?.values as number[],
         curve: "linear",
-        // color: colors[measure?.name],
         label: measure.name,
       }))}
       width={1100}

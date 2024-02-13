@@ -1,17 +1,23 @@
 import { List, Typography } from "@mui/material";
 import columnStyles from "../../../styles/columns.styles";
+import { RootState } from "../../../types";
+import { useSelector } from "react-redux";
+import { handleDragElement } from "../../../utils";
 
 function Dimensions() {
-  const handleOnDrag = (e: React.DragEvent, column: string) => {
-    e.dataTransfer.setData("column", column);
-  };
+  const { columns } = useSelector((state: RootState) => state.columns);
+  const { dimensions } = columns;
+
   return (
     <List sx={columnStyles.columnsGroup}>
       <Typography sx={columnStyles.header}>Dimensions</Typography>
-      {["Product", "Year", "Country"].map((text) => (
-        <div key={text} onDragStart={(e) => handleOnDrag(e, text)}>
-          <Typography key={text} sx={columnStyles.column} draggable>
-            {text}
+      {dimensions.map((column) => (
+        <div
+          key={column.name}
+          onDragStart={(e) => handleDragElement(e, column)}
+        >
+          <Typography sx={columnStyles.column} draggable>
+            {column.name}
           </Typography>
         </div>
       ))}
