@@ -9,12 +9,15 @@ import {
   STATISTICS_NOT_FETCHED,
 } from "../constants";
 
+const defaultValue: LineChartStatisticsInfo = {
+  data: { dimension: { name: "", values: [] }, measures: [] },
+  status: STATISTICS_NOT_FETCHED,
+  error: "",
+};
+
 const useGetLineChartStatistics = (selectedColumns: SelectedColumnsState) => {
-  const [statistics, setStatistics] = useState<LineChartStatisticsInfo>({
-    data: { dimension: { name: "", values: [] }, measures: [] },
-    status: STATISTICS_NOT_FETCHED,
-    error: "",
-  });
+  const [statistics, setStatistics] =
+    useState<LineChartStatisticsInfo>(defaultValue);
 
   const { selectedDimension, selectedMeasures } = selectedColumns;
 
@@ -52,6 +55,8 @@ const useGetLineChartStatistics = (selectedColumns: SelectedColumnsState) => {
             error: res.error,
           }));
         });
+    } else {
+      setStatistics(defaultValue);
     }
   }, [selectedColumns]);
 
