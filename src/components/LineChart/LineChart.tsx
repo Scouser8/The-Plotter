@@ -37,32 +37,32 @@ export default function MultipleLineChart(props: Props) {
 }
 
 // Will leave it here to use it if needed as mock data
-const testResponse = {
-  data: [
-    {
-      name: "Product",
-      values: [
-        "Diskette",
-        "Memory Card",
-        "HDTV Tuner",
-        "Flat Panel Graphics Monitor",
-        "Digital Camera",
-        "Minitower Speaker",
-        "Extension Cable",
-        "Y Box",
-      ],
-    },
-    {
-      name: "Cost",
-      values: [333.08, 43.07, 10.77, 194.76, 17.18, 43.3, 120.2, 605],
-    },
-    {
-      name: "Revenus",
-      values: [133.08, 17.07, 40.77, 44.76, 73.18, 193.3, 220.2, 405],
-    },
-    {
-      name: "Units sold",
-      values: [233.08, 86.07, 90.77, 164.76, 43.18, 143.3, 20.2, 805],
-    },
-  ],
-};
+// const testResponse = {
+//   data: [
+//     {
+//       name: "Product",
+//       values: [
+//         "Diskette",
+//         "Memory Card",
+//         "HDTV Tuner",
+//         "Flat Panel Graphics Monitor",
+//         "Digital Camera",
+//         "Minitower Speaker",
+//         "Extension Cable",
+//         "Y Box",
+//       ],
+//     },
+//     {
+//       name: "Cost",
+//       values: [333.08, 43.07, 10.77, 194.76, 17.18, 43.3, 120.2, 605],
+//     },
+//     {
+//       name: "Revenus",
+//       values: [133.08, 17.07, 40.77, 44.76, 73.18, 193.3, 220.2, 405],
+//     },
+//     {
+//       name: "Units sold",
+//       values: [233.08, 86.07, 90.77, 164.76, 43.18, 143.3, 20.2, 805],
+//     },
+//   ],
+// };

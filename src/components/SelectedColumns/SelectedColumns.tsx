@@ -82,7 +82,7 @@ function SelectedColumns(props: Props) {
           variant="outlined"
           onClick={() => hanldeClearColumnsGroup("selectedDimension", "")}
         >
-          Clear
+          Clear Dimension
         </Button>
       </Box>
       <Box
@@ -102,7 +102,7 @@ function SelectedColumns(props: Props) {
           variant="outlined"
           onClick={() => hanldeClearColumnsGroup("selectedMeasures", [])}
         >
-          Clear
+          Clear Measures
         </Button>
       </Box>
     </Box>
