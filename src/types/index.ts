@@ -7,6 +7,9 @@ import {
 } from "./../constants/index";
 import store from "../store";
 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 export type ColumnFunction =
   | typeof DIMENSION_FUNCTION
   | typeof MEASURE_FUNCTION;
@@ -34,5 +37,8 @@ export type StatisticsStatus =
   | typeof STATISTICS_FETCH_FAILED
   | typeof STATISTICS_NOT_FETCHED;
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type SnackSeverity = "error" | "success" | "warning" | "info";
+
+export type VerticalAlignment = "top" | "bottom";
+
+export type HorizontalAlignment = "left" | "center" | "right";

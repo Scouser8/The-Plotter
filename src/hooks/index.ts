@@ -9,6 +9,8 @@ import {
   STATISTICS_NOT_FETCHED,
 } from "../constants";
 
+const DEFAULT_FETCH_FAIL_MESSAGE = "Failed to fetch statistics";
+
 const defaultValue: LineChartStatisticsInfo = {
   data: { dimension: { name: "", values: [] }, measures: [] },
   status: STATISTICS_NOT_FETCHED,
@@ -22,6 +24,11 @@ const useGetLineChartStatistics = (selectedColumns: SelectedColumnsState) => {
   const { selectedDimension, selectedMeasures } = selectedColumns;
 
   useEffect(() => {
+    setStatistics({
+      ...statistics,
+      status: STATISTICS_NOT_FETCHED,
+      error: "",
+    });
     if (selectedDimension && selectedMeasures.length) {
       axios
         .post("/data", {
@@ -52,7 +59,7 @@ const useGetLineChartStatistics = (selectedColumns: SelectedColumnsState) => {
           setStatistics((prevState) => ({
             ...prevState,
             status: STATISTICS_FETCH_FAILED,
-            error: res.error,
+            error: res.error || DEFAULT_FETCH_FAIL_MESSAGE,
           }));
         });
     } else {
