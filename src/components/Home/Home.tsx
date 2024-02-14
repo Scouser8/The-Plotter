@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import Columns from "../Columns";
 import MainContent from "../MainContent";
 import { AppDispatch, RootState } from "../../types";
-import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { fetchColumns } from "../../store/columnsSlice";
 import { useDispatch } from "react-redux";
+import Loader from "../Loader";
 
 function Home() {
   const { columns, error: columnsFetchError } = useSelector(
@@ -28,7 +28,7 @@ function Home() {
       <MainContent />
     </div>
   ) : (
-    <CircularProgress />
+    <Loader />
   );
 }
 
